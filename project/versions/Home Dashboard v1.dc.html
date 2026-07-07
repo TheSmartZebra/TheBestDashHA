@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:hover{color:inherit;opacity:.75}
+::-webkit-scrollbar{display:none}
+</style>
+</helmet>
+<div data-screen-label="Home Dashboard" style="min-height:100vh;background:linear-gradient(165deg,#e9e3da 0%,#e0dadb 50%,#cfd4df 100%);background-attachment:fixed;color:#1d1d21;transition:background .4s ease, color .4s ease;{{ rootOv }}">
+  <div style="max-width:1120px;margin:0 auto;padding:26px 20px 64px">
+
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:4px 4px 16px">
+      <div>
+        <div style="font-size:13px;font-weight:600;opacity:.5;letter-spacing:.02em">{{ clock }}</div>
+        <h1 style="margin:2px 0 0;font-size:34px;font-weight:700;letter-spacing:-.02em">My Home</h1>
+        <div style="margin-top:5px;font-size:14px;opacity:.6">{{ summary }}</div>
+      </div>
+      <button onClick="{{ toggleEdit }}" style="{{ editBtnStyle }}">{{ editLabel }}</button>
+    </div>
+
+    <sc-if value="{{ edit }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ hintStyle }}">Tap any tile to pin or unpin it from Favorites. Tap Done when finished.</div>
+    </sc-if>
+
+    <div style="display:flex;gap:10px;overflow-x:auto;padding:2px 4px 6px;scrollbar-width:none">
+      <sc-for list="{{ chips }}" as="c" hint-placeholder-count="5">
+        <button onClick="{{ c.tap }}" style="{{ c.style }}">
+          <span style="{{ c.iconStyle }}">{{ c.icon }}</span>
+          <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;text-align:left">
+            <span style="font-size:13px;font-weight:600">{{ c.label }}</span>
+            <span style="font-size:11.5px;opacity:.55;white-space:nowrap">{{ c.status }}</span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ showScenesRow }}" hint-placeholder-val="{{ true }}">
+      <div style="margin-top:22px">
+        <div style="padding:0 4px 10px;font-size:19px;font-weight:700;letter-spacing:-.01em">Scenes</div>
+        <div style="display:flex;gap:10px;overflow-x:auto;padding:0 4px;scrollbar-width:none">
+          <sc-for list="{{ scenes }}" as="s" hint-placeholder-count="4">
+            <button onClick="{{ s.tap }}" style="{{ s.style }}">
+              <span style="{{ s.iconStyle }}">{{ s.icon }}</span>
+              <span style="font-size:13px;font-weight:600;white-space:nowrap">{{ s.name }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-for list="{{ sections }}" as="sec" hint-placeholder-count="3">
+      <div style="margin-top:26px">
+        <div style="display:flex;align-items:baseline;gap:8px;padding:0 4px 10px">
+          <h2 style="margin:0;font-size:19px;font-weight:700;letter-spacing:-.01em">{{ sec.title }}</h2>
+          <span style="font-size:13px;opacity:.5">{{ sec.sub }}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:12px">
+          <sc-for list="{{ sec.tiles }}" as="t" hint-placeholder-count="4">
+            <div onClick="{{ t.tap }}" style="{{ t.style }}">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:6px">
+                <span style="{{ t.iconStyle }}">{{ t.icon }}</span>
+                <sc-if value="{{ t.showPin }}" hint-placeholder-val="{{ false }}">
+                  <span style="{{ t.pinStyle }}"></span>
+                </sc-if>
+                <sc-if value="{{ t.showTherm }}" hint-placeholder-val="{{ false }}">
+                  <span style="display:flex;gap:6px">
+                    <button onClick="{{ t.down }}" style="{{ t.btnStyle }}">−</button>
+                    <button onClick="{{ t.up }}" style="{{ t.btnStyle }}">+</button>
+                  </span>
+                </sc-if>
+              </div>
+              <div style="margin-top:auto;padding-top:14px">
+                <div style="font-size:14.5px;font-weight:600;line-height:1.25">{{ t.name }}</div>
+                <div style="font-size:12.5px;margin-top:2px;{{ t.statusCss }}">{{ t.status }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+
+    <div style="margin-top:40px;padding:0 4px;font-size:12px;opacity:.4">Prototype — tap tiles to toggle · tap a category to filter · Edit to pin favorites</div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: &quot;100%&quot;, &quot;height&quot;: &quot;100%&quot;}, &quot;wallpaper&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Dawn&quot;, &quot;Slate&quot;, &quot;Sage&quot;, &quot;Midnight&quot;], &quot;default&quot;: &quot;Dawn&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Appearance&quot;}, &quot;accent&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;options&quot;: [&quot;#F5A623&quot;, &quot;#FF8A5C&quot;, &quot;#5AC8FA&quot;, &quot;#B08CFF&quot;], &quot;default&quot;: &quot;#F5A623&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Appearance&quot;}, &quot;showScenes&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = {
+    devices: [
+      { id: 'therm', name: 'Thermostat', room: 'Living Room', kind: 'climate', on: true, temp: 21.5, pin: true },
+      { id: 'lr-lamp', name: 'Floor Lamp', room: 'Living Room', kind: 'light', on: true, pin: true },
+      { id: 'lr-ceil', name: 'Ceiling Lights', room: 'Living Room', kind: 'light', on: false },
+      { id: 'lr-tv', name: 'TV', room: 'Living Room', kind: 'media', on: false },
+      { id: 'lr-fan', name: 'Air Purifier', room: 'Living Room', kind: 'fan', on: true },
+      { id: 'lr-blinds', name: 'Blinds', room: 'Living Room', kind: 'cover', on: true },
+      { id: 'k-pend', name: 'Pendant Lights', room: 'Kitchen', kind: 'light', on: true },
+      { id: 'k-cab', name: 'Under-Cabinet', room: 'Kitchen', kind: 'light', on: false },
+      { id: 'k-coffee', name: 'Coffee Maker', room: 'Kitchen', kind: 'outlet', on: false, pin: true },
+      { id: 'b-lamp', name: 'Bedside Lamp', room: 'Bedroom', kind: 'light', on: false },
+      { id: 'b-blinds', name: 'Blinds', room: 'Bedroom', kind: 'cover', on: true },
+      { id: 'b-read', name: 'Reading Light', room: 'Bedroom', kind: 'light', on: false },
+      { id: 'e-lock', name: 'Front Door', room: 'Entryway', kind: 'lock', on: true, pin: true },
+      { id: 'e-cam', name: 'Doorbell Camera', room: 'Entryway', kind: 'camera', on: true },
+      { id: 'e-hall', name: 'Hallway Light', room: 'Entryway', kind: 'light', on: false },
+      { id: 'o-desk', name: 'Desk Lamp', room: 'Office', kind: 'light', on: true },
+      { id: 'o-mon', name: 'Monitor Light', room: 'Office', kind: 'light', on: false }
+    ],
+    category: 'home',
+    edit: false,
+    now: new Date()
+  };
+
+  componentDidMount() { this._t = setInterval(() => this.setState({ now: new Date() }), 30000); }
+  componentWillUnmount() { clearInterval(this._t); }
+
+  svg(kids) { return React.createElement('svg', { width: 18, height: 18, viewBox: '0 0 20 20', fill: 'none' }, kids); }
+
+  icon(kind, c) {
+    const el = React.createElement;
+    const k = {
+      light: [el('circle', { key: 1, cx: 10, cy: 8, r: 4.6, fill: c }), el('rect', { key: 2, x: 8.4, y: 13, width: 3.2, height: 3.6, rx: 1.2, fill: c })],
+      climate: [el('rect', { key: 1, x: 8.6, y: 2.6, width: 2.8, height: 9, rx: 1.4, fill: c }), el('circle', { key: 2, cx: 10, cy: 14, r: 3.4, fill: c })],
+      lock: [el('rect', { key: 1, x: 4.8, y: 8.6, width: 10.4, height: 8.2, rx: 2.2, fill: c }), el('path', { key: 2, d: 'M6.8 8.6V6.6a3.2 3.2 0 0 1 6.4 0v2', stroke: c, strokeWidth: 1.9, fill: 'none' })],
+      camera: [el('rect', { key: 1, x: 2.4, y: 5.8, width: 10, height: 8.4, rx: 2.2, fill: c }), el('path', { key: 2, d: 'M12.4 8.8l5-2.4v7.2l-5-2.4z', fill: c })],
+      media: [el('rect', { key: 1, x: 2.6, y: 4.4, width: 14.8, height: 9.4, rx: 2, fill: c }), el('rect', { key: 2, x: 6.4, y: 15.2, width: 7.2, height: 1.8, rx: 0.9, fill: c })],
+      outlet: [el('circle', { key: 1, cx: 10, cy: 10, r: 6.8, stroke: c, strokeWidth: 1.8 }), el('circle', { key: 2, cx: 7.8, cy: 10, r: 1.1, fill: c }), el('circle', { key: 3, cx: 12.2, cy: 10, r: 1.1, fill: c })],
+      fan: [el('circle', { key: 1, cx: 10, cy: 10, r: 1.8, fill: c }), el('circle', { key: 2, cx: 10, cy: 5, r: 2.7, fill: c, opacity: 0.85 }), el('circle', { key: 3, cx: 5.8, cy: 12.6, r: 2.7, fill: c, opacity: 0.85 }), el('circle', { key: 4, cx: 14.2, cy: 12.6, r: 2.7, fill: c, opacity: 0.85 })],
+      cover: [el('rect', { key: 1, x: 3.6, y: 3.6, width: 12.8, height: 12.8, rx: 2, stroke: c, strokeWidth: 1.8 }), el('rect', { key: 2, x: 4.6, y: 6.8, width: 10.8, height: 1.6, fill: c }), el('rect', { key: 3, x: 4.6, y: 10, width: 10.8, height: 1.6, fill: c })],
+      home: [el('rect', { key: 1, x: 3.4, y: 3.4, width: 6, height: 6, rx: 1.6, fill: c }), el('rect', { key: 2, x: 10.6, y: 3.4, width: 6, height: 6, rx: 1.6, fill: c }), el('rect', { key: 3, x: 3.4, y: 10.6, width: 6, height: 6, rx: 1.6, fill: c }), el('rect', { key: 4, x: 10.6, y: 10.6, width: 6, height: 6, rx: 1.6, fill: c })],
+      sun: [el('circle', { key: 1, cx: 10, cy: 10, r: 3.6, fill: c }), el('rect', { key: 2, x: 9.2, y: 2.4, width: 1.6, height: 3.2, rx: 0.8, fill: c }), el('rect', { key: 3, x: 9.2, y: 14.4, width: 1.6, height: 3.2, rx: 0.8, fill: c }), el('rect', { key: 4, x: 2.4, y: 9.2, width: 3.2, height: 1.6, rx: 0.8, fill: c }), el('rect', { key: 5, x: 14.4, y: 9.2, width: 3.2, height: 1.6, rx: 0.8, fill: c })],
+      moon: [el('circle', { key: 1, cx: 10, cy: 10, r: 5.4, fill: c }), el('circle', { key: 2, cx: 15.4, cy: 5, r: 1.4, fill: c, opacity: 0.7 })],
+      film: [el('rect', { key: 1, x: 3, y: 4.6, width: 14, height: 10.8, rx: 2, fill: c }), el('circle', { key: 2, cx: 7, cy: 10, r: 1.2, fill: '#00000055' }), el('circle', { key: 3, cx: 13, cy: 10, r: 1.2, fill: '#00000055' })],
+      door: [el('rect', { key: 1, x: 5.4, y: 3, width: 9.2, height: 14, rx: 1.8, fill: c }), el('circle', { key: 2, cx: 12.2, cy: 10.2, r: 1.1, fill: '#00000055' })]
+    };
+    return this.svg(k[kind] || k.light);
+  }
+
+  toggle(id) {
+    this.setState(s => ({ devices: s.devices.map(d => d.id === id ? { ...d, on: !d.on } : d) }));
+  }
+  togglePin(id) {
+    this.setState(s => ({ devices: s.devices.map(d => d.id === id ? { ...d, pin: !d.pin } : d) }));
+  }
+  applyScene(fn) {
+    this.setState(s => ({ devices: s.devices.map(fn) }));
+  }
+
+  renderVals() {
+    const el = React.createElement;
+    const p = this.props;
+    const wallpaper = p.wallpaper ?? 'Dawn';
+    const accent = p.accent ?? '#F5A623';
+    const showScenes = p.showScenes ?? true;
+    const dark = wallpaper === 'Midnight';
+    const grads = {
+      Dawn: 'linear-gradient(165deg,#e9e3da 0%,#e0dadb 50%,#cfd4df 100%)',
+      Slate: 'linear-gradient(165deg,#dee3ec 0%,#d3dae6 55%,#c7d0de 100%)',
+      Sage: 'linear-gradient(165deg,#e1e6dc 0%,#d5ded2 55%,#c9d4ca 100%)',
+      Midnight: 'linear-gradient(165deg,#20232c 0%,#191b23 55%,#131519 100%)'
+    };
+    const ink = dark ? '#f2f3f5' : '#1d1d21';
+    const rootOv = (wallpaper !== 'Dawn') ? `background:${grads[wallpaper]};background-attachment:fixed;color:${ink}` : '';
+
+    const kindColor = { light: accent, climate: '#EF6950', lock: '#4CAF77', camera: '#4D8FE0', media: '#9B7BE0', outlet: '#4D8FE0', fan: '#57B8C9', cover: '#8E8E96' };
+    const dim = dark ? 'rgba(255,255,255,.65)' : 'rgba(60,60,67,.55)';
+    const iconOffBg = dark ? 'rgba(255,255,255,.12)' : 'rgba(120,120,128,.16)';
+    const glass = dark ? 'rgba(255,255,255,.08)' : 'rgba(255,255,255,.45)';
+    const solid = dark ? 'rgba(56,58,68,.92)' : 'rgba(255,255,255,.92)';
+
+    const D = this.state.devices;
+    const edit = this.state.edit;
+    const cat = this.state.category;
+    const catOf = d => d.kind === 'light' ? 'lights' : (d.kind === 'climate' || d.kind === 'fan') ? 'climate' : (d.kind === 'lock' || d.kind === 'camera') ? 'security' : (d.kind === 'media' || d.kind === 'outlet') ? 'media' : 'other';
+
+    // ---- header ----
+    const now = this.state.now;
+    const clock = now.toLocaleDateString([], { weekday: 'long' }) + ' · ' + now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    const lightsOn = D.filter(d => d.kind === 'light' && d.on).length;
+    const therm = D.find(d => d.kind === 'climate');
+    const lock = D.find(d => d.kind === 'lock');
+    const summary = `${lightsOn} light${lightsOn === 1 ? '' : 's'} on · ${therm.temp.toFixed(1)}° inside · ${lock.on ? 'Front door locked' : 'Front door unlocked'}`;
+
+    // ---- chips ----
+    const chipDefs = [
+      { key: 'home', label: 'Home', icn: 'home', status: `${D.filter(d => d.on).length} on` },
+      { key: 'lights', label: 'Lights', icn: 'light', status: lightsOn ? `${lightsOn} on` : 'All off' },
+      { key: 'climate', label: 'Climate', icn: 'climate', status: `${therm.temp.toFixed(1)}°` },
+      { key: 'security', label: 'Security', icn: 'lock', status: lock.on ? 'Locked' : 'Unlocked' },
+      { key: 'media', label: 'Media', icn: 'media', status: (n => n ? `${n} on` : 'Off')(D.filter(d => catOf(d) === 'media' && d.on).length) }
+    ];
+    const chips = chipDefs.map(c => {
+      const sel = cat === c.key;
+      const anyOn = c.key === 'home' ? true : D.some(d => catOf(d) === c.key && d.on);
+      return {
+        label: c.label, status: c.status,
+        tap: () => this.setState({ category: c.key }),
+        style: {
+          display: 'flex', alignItems: 'center', gap: 8, padding: '7px 15px 7px 8px', borderRadius: 24, border: 'none',
+          cursor: 'pointer', flex: 'none', fontFamily: 'inherit', color: sel ? (dark ? '#15161a' : '#fff') : ink,
+          background: sel ? (dark ? 'rgba(255,255,255,.94)' : 'rgba(40,40,46,.9)') : glass,
+          backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', transition: 'background .2s, color .2s',
+          boxShadow: '0 1px 2px rgba(0,0,0,.05)'
+        },
+        iconStyle: { width: 28, height: 28, borderRadius: '50%', flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', background: anyOn && c.key !== 'home' ? kindColor[c.icn] : iconOffBg },
+        icon: this.icon(c.icn, anyOn && c.key !== 'home' ? '#fff' : (sel ? (dark ? '#15161a' : '#fff') : dim))
+      };
+    });
+
+    // ---- scenes ----
+    const sceneDefs = [
+      { name: 'Good Morning', icn: 'sun', col: accent, fn: d => (d.room === 'Bedroom' || d.room === 'Kitchen') && d.kind === 'light' ? { ...d, on: true } : d.kind === 'cover' ? { ...d, on: true } : d.id === 'k-coffee' ? { ...d, on: true } : d },
+      { name: 'Movie Night', icn: 'film', col: '#9B7BE0', fn: d => d.room === 'Living Room' && d.kind === 'light' ? { ...d, on: false } : d.id === 'lr-tv' ? { ...d, on: true } : d.kind === 'cover' && d.room === 'Living Room' ? { ...d, on: false } : d },
+      { name: 'Arrive Home', icn: 'door', col: '#4CAF77', fn: d => d.id === 'e-lock' ? { ...d, on: false } : (d.id === 'e-hall' || d.id === 'lr-lamp') ? { ...d, on: true } : d },
+      { name: 'Goodnight', icn: 'moon', col: '#4D8FE0', fn: d => d.kind === 'light' || d.kind === 'media' ? { ...d, on: false } : d.kind === 'lock' ? { ...d, on: true } : d.kind === 'cover' ? { ...d, on: false } : d }
+    ];
+    const scenes = sceneDefs.map(s => ({
+      name: s.name,
+      tap: () => this.applyScene(s.fn),
+      style: { display: 'flex', alignItems: 'center', gap: 8, padding: '7px 15px 7px 8px', borderRadius: 24, border: 'none', cursor: 'pointer', flex: 'none', fontFamily: 'inherit', color: ink, background: glass, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', boxShadow: '0 1px 2px rgba(0,0,0,.05)' },
+      iconStyle: { width: 28, height: 28, borderRadius: '50%', flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', background: s.col },
+      icon: this.icon(s.icn, '#fff')
+    }));
+
+    // ---- tiles ----
+    const statusOf = d => {
+      if (d.kind === 'climate') return d.on ? `Heat to ${d.temp.toFixed(1)}°` : 'Off';
+      if (d.kind === 'lock') return d.on ? 'Locked' : 'Unlocked';
+      if (d.kind === 'camera') return d.on ? 'Streaming' : 'Off';
+      if (d.kind === 'cover') return d.on ? 'Open' : 'Closed';
+      if (d.kind === 'media') return d.on ? 'Playing' : 'Off';
+      return d.on ? 'On' : 'Off';
+    };
+    const mkTile = d => ({
+      name: d.name,
+      status: statusOf(d),
+      statusCss: 'opacity:.55',
+      tap: () => edit ? this.togglePin(d.id) : this.toggle(d.id),
+      style: {
+        borderRadius: 18, padding: 12, minHeight: 112, display: 'flex', flexDirection: 'column', cursor: 'pointer', userSelect: 'none',
+        background: d.on ? solid : glass, color: ink,
+        backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
+        transition: 'background .25s', boxShadow: d.on ? '0 4px 14px rgba(0,0,0,.08)' : '0 1px 2px rgba(0,0,0,.05)',
+        outline: edit ? `1.5px dashed ${dark ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.25)'}` : 'none', outlineOffset: -1.5
+      },
+      iconStyle: { width: 34, height: 34, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 'none', background: d.on ? kindColor[d.kind] : iconOffBg, transition: 'background .25s' },
+      icon: this.icon(d.kind, d.on ? '#fff' : dim),
+      showPin: edit,
+      pinStyle: { width: 16, height: 16, borderRadius: '50%', flex: 'none', background: d.pin ? accent : 'transparent', boxShadow: d.pin ? 'none' : `inset 0 0 0 1.5px ${dark ? 'rgba(255,255,255,.4)' : 'rgba(0,0,0,.3)'}`, transition: 'background .2s' },
+      showTherm: !edit && d.kind === 'climate' && d.on,
+      btnStyle: { width: 26, height: 26, borderRadius: '50%', border: 'none', cursor: 'pointer', fontSize: 15, lineHeight: 1, fontFamily: 'inherit', color: ink, background: iconOffBg, display: 'flex', alignItems: 'center', justifyContent: 'center' },
+      up: e => { e.stopPropagation(); this.setState(s => ({ devices: s.devices.map(x => x.id === d.id ? { ...x, temp: Math.min(28, x.temp + 0.5) } : x) })); },
+      down: e => { e.stopPropagation(); this.setState(s => ({ devices: s.devices.map(x => x.id === d.id ? { ...x, temp: Math.max(15, x.temp - 0.5) } : x) }));  }
+    });
+
+    const rooms = ['Living Room', 'Kitchen', 'Bedroom', 'Entryway', 'Office'];
+    const sub = list => { const n = list.filter(d => d.on).length; return n ? `${n} on` : ''; };
+    let sections = [];
+    if (cat === 'home') {
+      const pinned = D.filter(d => d.pin);
+      if (pinned.length || edit) sections.push({ title: 'Favorites', sub: sub(pinned), tiles: pinned.map(mkTile) });
+      rooms.forEach(r => {
+        const list = D.filter(d => d.room === r);
+        if (list.length) sections.push({ title: r, sub: sub(list), tiles: list.map(mkTile) });
+      });
+    } else {
+      rooms.forEach(r => {
+        const list = D.filter(d => d.room === r && catOf(d) === cat);
+        if (list.length) sections.push({ title: r, sub: sub(list), tiles: list.map(mkTile) });
+      });
+    }
+
+    return {
+      rootOv, clock, summary, edit,
+      editLabel: edit ? 'Done' : 'Edit',
+      toggleEdit: () => this.setState(s => ({ edit: !s.edit })),
+      editBtnStyle: { border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 13, fontWeight: 600, padding: '8px 16px', borderRadius: 20, color: edit ? (dark ? '#15161a' : '#fff') : ink, background: edit ? (dark ? 'rgba(255,255,255,.94)' : 'rgba(40,40,46,.9)') : glass, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', boxShadow: '0 1px 2px rgba(0,0,0,.05)', flex: 'none' },
+      hintStyle: { margin: '0 4px 14px', padding: '10px 14px', borderRadius: 14, fontSize: 13, background: glass, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', opacity: 0.85 },
+      chips, scenes,
+      showScenesRow: showScenes && cat === 'home' && !edit,
+      sections
+    };
+  }
+}
+</script>
+</body>
+</html>
