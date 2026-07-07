@@ -1,0 +1,141 @@
+/*
+  Design tokens for the Liquid Glass dashboard.
+  --accent / --tint-* are overridden at runtime by ThemeProvider based on the
+  user's saved preference (HA frontend user-data), everything else is static.
+*/
+:root {
+  color-scheme: dark;
+
+  /* ink / surfaces */
+  --ink: #f2f3f5;
+  --ink-dim: rgba(255, 255, 255, 0.6);
+  --ink-faint: rgba(255, 255, 255, 0.4);
+  --surface-glass: rgba(255, 255, 255, 0.07);
+  --surface-glass-hi: rgba(255, 255, 255, 0.12);
+  --surface-glass-strong: rgba(38, 40, 48, 0.92);
+  --surface-menu: rgba(40, 42, 50, 0.92);
+  --surface-sidebar: rgba(255, 255, 255, 0.045);
+  --surface-sidebar-drawer: rgba(28, 29, 36, 0.92);
+  --icon-off-bg: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-dashed: rgba(255, 255, 255, 0.35);
+
+  /* accent (user-configurable) */
+  --accent: #f5a623;
+  --accent-lite: #f7b850;
+
+  /* per-device-kind colors */
+  --kind-light: var(--accent);
+  --kind-climate: #ef6950;
+  --kind-lock: #4caf77;
+  --kind-camera: #4d8fe0;
+  --kind-media: #9b7be0;
+  --kind-speaker: #9b7be0;
+  --kind-outlet: #4d8fe0;
+  --kind-fan: #57b8c9;
+  --kind-cover: #8e8e96;
+  --kind-oven: #e0793c;
+  --kind-dishwasher: #57b8c9;
+  --kind-sensor: #5ac8fa;
+  --kind-vacuum: #57b8c9;
+  --kind-humidifier: #4d8fe0;
+  --kind-alarm: #ef6950;
+  --kind-switch: var(--accent);
+  --kind-generic: #8e8e96;
+  --warn: #f0b35c;
+  --danger: #ff8177;
+  --live-red: #ff8177;
+
+  /* background tint presets (set on <html data-tint="...">) */
+  --bg-gradient: linear-gradient(160deg, #1c1d24 0%, #15161b 55%, #101116 100%);
+
+  /* radius */
+  --r-xs: 8px;
+  --r-sm: 11px;
+  --r-md: 14px;
+  --r-lg: 16px;
+  --r-xl: 18px;
+  --r-2xl: 20px;
+  --r-pill: 999px;
+  --r-circle: 50%;
+
+  /* spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 14px;
+  --sp-5: 16px;
+  --sp-6: 20px;
+  --sp-7: 24px;
+  --sp-8: 26px;
+
+  /* blur */
+  --blur-sm: 20px;
+  --blur-md: 24px;
+  --blur-lg: 30px;
+
+  /* shadows */
+  --shadow-rest: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-active: 0 4px 14px rgba(0, 0, 0, 0.25);
+  --shadow-menu: 0 18px 44px rgba(0, 0, 0, 0.5);
+  --shadow-modal: 0 24px 60px rgba(0, 0, 0, 0.5);
+
+  /* type */
+  --fs-xs: 11px;
+  --fs-sm: 12px;
+  --fs-base: 13.5px;
+  --fs-md: 14.5px;
+  --fs-lg: 17px;
+  --fs-xl: 19px;
+  --fs-2xl: 32px;
+
+  /* motion */
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 0.15s;
+  --dur-med: 0.25s;
+}
+
+:root[data-tint="Indigo"] {
+  --bg-gradient: linear-gradient(160deg, #1b1e2e 0%, #161829 55%, #101222 100%);
+}
+:root[data-tint="Mocha"] {
+  --bg-gradient: linear-gradient(160deg, #221d19 0%, #1a1512 55%, #13100d 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #131418;
+  color: var(--ink);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Text",
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+a:hover {
+  opacity: 0.75;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+button,
+input {
+  font-family: inherit;
+}

@@ -1,0 +1,185 @@
+.glass {
+  background: var(--surface-glass);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+}
+.glassHi {
+  background: var(--surface-glass-hi);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+}
+
+.iconButton {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  border: none;
+  cursor: pointer;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-glass);
+  color: var(--ink);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
+  transition: background var(--dur-fast) var(--ease-standard);
+}
+.iconButton:hover {
+  background: var(--surface-glass-hi);
+}
+.iconButtonActive {
+  background: var(--ink) !important;
+  color: #15161a !important;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px 8px 9px;
+  border-radius: var(--r-pill);
+  border: none;
+  cursor: pointer;
+  flex: none;
+  font-family: inherit;
+  color: var(--ink);
+  background: var(--surface-glass);
+  box-shadow: var(--shadow-rest);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
+  white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease-standard);
+}
+.pill:hover {
+  background: var(--surface-glass-hi);
+}
+
+.toggleSwitch {
+  width: 46px;
+  height: 28px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  flex: none;
+  padding: 2px;
+  display: flex;
+  background: var(--icon-off-bg);
+  transition: background var(--dur-med) var(--ease-standard);
+}
+.toggleSwitchOn {
+  background: var(--kind-lock);
+  justify-content: flex-end;
+}
+.toggleSwitchOff {
+  justify-content: flex-start;
+}
+.toggleKnob {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px 9px 10px;
+  border-radius: var(--r-md);
+  border: none;
+  cursor: pointer;
+  flex: none;
+  font-family: inherit;
+  color: var(--ink);
+  background: var(--surface-glass);
+  box-shadow: var(--shadow-rest);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
+  transition:
+    background var(--dur-med) var(--ease-standard),
+    box-shadow var(--dur-med) var(--ease-standard);
+}
+.statCardSelected {
+  background: var(--surface-glass-hi);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.statCardIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-xs);
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.statCardBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+  text-align: left;
+}
+.statCardLabel {
+  font-size: var(--fs-base);
+  font-weight: 600;
+}
+.statCardStatus {
+  font-size: var(--fs-sm);
+  opacity: 0.55;
+  white-space: nowrap;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.modalCard {
+  width: min(430px, calc(100vw - 48px));
+  border-radius: var(--r-2xl);
+  padding: 22px;
+  background: var(--surface-glass-strong);
+  backdrop-filter: blur(var(--blur-lg));
+  -webkit-backdrop-filter: blur(var(--blur-lg));
+  box-shadow: var(--shadow-modal);
+  color: var(--ink);
+}
+.modalTitle {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.modalBody {
+  margin-top: 8px;
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  opacity: 0.7;
+}
+.modalClose {
+  margin-top: 18px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  background: var(--surface-glass-hi);
+  color: var(--ink);
+}
+
+.sheetOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgba(0, 0, 0, 0.45);
+}

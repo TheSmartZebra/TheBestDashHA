@@ -1,0 +1,57 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--r-xl);
+  background: var(--surface-glass);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  box-shadow: var(--shadow-rest);
+}
+.icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.name {
+  font-size: var(--fs-md);
+  font-weight: 600;
+}
+.detail {
+  font-size: var(--fs-sm);
+  opacity: 0.55;
+}
+.addBtn {
+  padding: 7px 16px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  flex: none;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: inherit;
+  background: #f2f3f5;
+  color: #15161a;
+}
+.addBtnDone {
+  background: var(--icon-off-bg);
+  color: var(--ink-dim);
+  cursor: default;
+}

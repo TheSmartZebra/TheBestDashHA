@@ -1,0 +1,34 @@
+.root {
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  background: var(--bg-gradient);
+  color: var(--ink);
+}
+.main {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+}
+.mainInner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 26px 24px 64px;
+}
+.footNote {
+  margin-top: 40px;
+  padding: 0 2px;
+  font-size: var(--fs-sm);
+  opacity: 0.35;
+  line-height: 1.6;
+}
+.disconnectedBanner {
+  margin: 0 2px 14px;
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-base);
+  background: rgba(240, 179, 92, 0.16);
+  color: var(--warn);
+  backdrop-filter: blur(var(--blur-lg));
+  -webkit-backdrop-filter: blur(var(--blur-lg));
+}

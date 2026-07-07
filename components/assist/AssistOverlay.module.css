@@ -1,0 +1,85 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 24px;
+}
+.panel {
+  width: min(480px, 100%);
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r-2xl);
+  padding: 18px;
+  background: var(--surface-glass-strong);
+  backdrop-filter: blur(var(--blur-lg));
+  -webkit-backdrop-filter: blur(var(--blur-lg));
+  box-shadow: var(--shadow-modal);
+}
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.transcript {
+  margin-top: 14px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 60px;
+}
+.bubble {
+  max-width: 85%;
+  padding: 9px 13px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+.bubbleUser {
+  align-self: flex-end;
+  background: var(--accent);
+  color: #1a1300;
+}
+.bubbleAssist {
+  align-self: flex-start;
+  background: var(--surface-glass-hi);
+}
+.form {
+  margin-top: 14px;
+  display: flex;
+  gap: 8px;
+}
+.input {
+  flex: 1;
+  padding: 11px 14px;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ink);
+  font-size: 14px;
+  font-family: inherit;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.send {
+  padding: 0 18px;
+  border-radius: var(--r-md);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  background: var(--accent);
+  color: #1a1300;
+}

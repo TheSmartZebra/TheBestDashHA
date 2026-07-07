@@ -1,0 +1,44 @@
+.wrap {
+  margin-top: 26px;
+}
+.headRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 0 2px 10px;
+}
+.headRowNoSub {
+  padding: 0 2px 10px;
+}
+.title {
+  margin: 0;
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.sub {
+  font-size: var(--fs-base);
+  opacity: 0.5;
+}
+.rowGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+  gap: 12px;
+}
+.favGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));
+  gap: 12px;
+}
+.camGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+.scenesRow {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 0 2px;
+  scrollbar-width: none;
+}
