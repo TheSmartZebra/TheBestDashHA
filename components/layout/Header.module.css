@@ -50,7 +50,7 @@
 .menuDivider {
   height: 1px;
   margin: 6px 6px;
-  background: rgba(255, 255, 255, 0.09);
+  background: var(--overlay-divider);
 }
 .menuRow {
   display: block;
@@ -67,7 +67,7 @@
   text-decoration: none;
 }
 .menuRow:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--overlay-hover);
   opacity: 1;
 }
 .menuOverlay {

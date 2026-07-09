@@ -1,0 +1,32 @@
+.wrap {
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  color: var(--ink);
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px 80px;
+}
+.inner {
+  width: 100%;
+  max-width: 640px;
+}
+.head {
+  margin-bottom: 26px;
+}
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.sub {
+  margin-top: 8px;
+  font-size: var(--fs-md);
+  line-height: 1.55;
+  opacity: 0.65;
+}
+.loading {
+  padding: 40px 0;
+  text-align: center;
+  opacity: 0.6;
+  font-size: var(--fs-base);
+}

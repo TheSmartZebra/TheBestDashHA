@@ -25,7 +25,7 @@ export function IconCircle({
         transition: "background .25s"
       }}
     >
-      <Icon kind={kind} color={on ? "#fff" : "rgba(255,255,255,.6)"} size={size > 50 ? 28 : 19} />
+      <Icon kind={kind} color={on ? "#fff" : "var(--ink-dim)"} size={size > 50 ? 28 : 19} />
     </span>
   );
 }

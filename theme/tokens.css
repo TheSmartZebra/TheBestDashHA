@@ -1,7 +1,9 @@
 /*
   Design tokens for the Liquid Glass dashboard.
-  --accent / --tint-* are overridden at runtime by ThemeProvider based on the
-  user's saved preference (HA frontend user-data), everything else is static.
+  --accent / --tint-* and the [data-theme] attribute are all set at runtime by
+  AppSettingsProvider based on the user's saved preference (HA frontend user-data).
+  Base :root below is the dark palette; :root[data-theme="light"] overrides it for
+  the "White & Granite" light palette (white walls/trim, black granite counters).
 */
 :root {
   color-scheme: dark;
@@ -20,28 +22,36 @@
   --border-subtle: rgba(255, 255, 255, 0.06);
   --border-dashed: rgba(255, 255, 255, 0.35);
 
+  /* generic overlay/field tokens (hover states, dividers, form borders) */
+  --overlay-hover: rgba(255, 255, 255, 0.08);
+  --overlay-hover-strong: rgba(255, 255, 255, 0.18);
+  --overlay-divider: rgba(255, 255, 255, 0.09);
+  --field-border: rgba(255, 255, 255, 0.12);
+  --field-border-strong: rgba(255, 255, 255, 0.14);
+  --focus-ring: rgba(255, 255, 255, 0.4);
+
   /* accent (user-configurable) */
   --accent: #f5a623;
   --accent-lite: #f7b850;
 
-  /* per-device-kind colors */
+  /* per-device-kind colors -- kept vivid in both themes on purpose */
   --kind-light: var(--accent);
-  --kind-climate: #ef6950;
-  --kind-lock: #4caf77;
-  --kind-camera: #4d8fe0;
-  --kind-media: #9b7be0;
-  --kind-speaker: #9b7be0;
-  --kind-outlet: #4d8fe0;
-  --kind-fan: #57b8c9;
-  --kind-cover: #8e8e96;
-  --kind-oven: #e0793c;
-  --kind-dishwasher: #57b8c9;
-  --kind-sensor: #5ac8fa;
-  --kind-vacuum: #57b8c9;
-  --kind-humidifier: #4d8fe0;
-  --kind-alarm: #ef6950;
+  --kind-climate: #ff6b4a;
+  --kind-lock: #35c281;
+  --kind-camera: #3f8cf3;
+  --kind-media: #a855f7;
+  --kind-speaker: #a855f7;
+  --kind-outlet: #3f8cf3;
+  --kind-fan: #22b8c9;
+  --kind-cover: #9b9ba6;
+  --kind-oven: #ff8a3d;
+  --kind-dishwasher: #22b8c9;
+  --kind-sensor: #2ec4ff;
+  --kind-vacuum: #22b8c9;
+  --kind-humidifier: #3f8cf3;
+  --kind-alarm: #ff5c5c;
   --kind-switch: var(--accent);
-  --kind-generic: #8e8e96;
+  --kind-generic: #9b9ba6;
   --warn: #f0b35c;
   --danger: #ff8177;
   --live-red: #ff8177;
@@ -101,6 +111,52 @@
 :root[data-tint="Mocha"] {
   --bg-gradient: linear-gradient(160deg, #221d19 0%, #1a1512 55%, #13100d 100%);
 }
+:root[data-tint="Granite"] {
+  --bg-gradient: linear-gradient(160deg, #1a1a1c 0%, #131315 55%, #0d0d0f 100%);
+}
+
+/*
+  Light theme: "White & Granite" -- white/warm-white surfaces echoing painted
+  walls and trim, near-black ink and glass borrowed from a black granite
+  counter, vivid per-kind accent colors unchanged from the dark theme.
+*/
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --ink: #1a1a1c;
+  --ink-dim: rgba(20, 20, 22, 0.62);
+  --ink-faint: rgba(20, 20, 22, 0.4);
+  --surface-glass: rgba(20, 20, 22, 0.05);
+  --surface-glass-hi: rgba(20, 20, 22, 0.09);
+  --surface-glass-strong: rgba(255, 255, 255, 0.86);
+  --surface-menu: rgba(255, 255, 255, 0.92);
+  --icon-off-bg: rgba(20, 20, 22, 0.08);
+  --border-subtle: rgba(20, 20, 22, 0.08);
+  --border-dashed: rgba(20, 20, 22, 0.3);
+
+  --overlay-hover: rgba(20, 20, 22, 0.06);
+  --overlay-hover-strong: rgba(20, 20, 22, 0.12);
+  --overlay-divider: rgba(20, 20, 22, 0.08);
+  --field-border: rgba(20, 20, 22, 0.14);
+  --field-border-strong: rgba(20, 20, 22, 0.18);
+  --focus-ring: rgba(20, 20, 22, 0.3);
+
+  --bg-gradient: linear-gradient(160deg, #fbfaf8 0%, #f3f1ed 55%, #ece9e3 100%);
+
+  --shadow-rest: 0 1px 2px rgba(20, 20, 22, 0.08);
+  --shadow-active: 0 4px 14px rgba(20, 20, 22, 0.1);
+  --shadow-menu: 0 18px 44px rgba(20, 20, 22, 0.16);
+  --shadow-modal: 0 24px 60px rgba(20, 20, 22, 0.2);
+}
+:root[data-theme="light"][data-tint="Indigo"] {
+  --bg-gradient: linear-gradient(160deg, #f8f8fc 0%, #eeeef7 55%, #e4e5f1 100%);
+}
+:root[data-theme="light"][data-tint="Mocha"] {
+  --bg-gradient: linear-gradient(160deg, #faf6f2 0%, #f1e9e1 55%, #e7dcd0 100%);
+}
+:root[data-theme="light"][data-tint="Granite"] {
+  --bg-gradient: linear-gradient(160deg, #faf9f7 0%, #f2f0ec 55%, #e9e6e0 100%);
+}
 
 * {
   box-sizing: border-box;
@@ -110,7 +166,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #131418;
+  background: var(--bg-gradient);
   color: var(--ink);
   font-family:
     -apple-system,
@@ -121,6 +177,9 @@ body {
     Arial,
     sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition:
+    background var(--dur-med) var(--ease-standard),
+    color var(--dur-med) var(--ease-standard);
 }
 
 a {

@@ -2,13 +2,21 @@
 
 import { useMemo } from "react";
 import { useAllStates, useRegistries } from "../store/entities-store";
+import { useAppSettings } from "../components/providers/AppSettingsProvider";
 import { allTiles, automationList, cameraList, groupByArea, scenesAndScripts, statCardData, summaryLine } from "../lib/ha/dashboard";
 import type { Category } from "../lib/ha/entity-model";
 
+/** Dashboard tiles, filtered to the entities the user chose to show (setup wizard / Settings). */
 export function useTiles() {
   const states = useAllStates();
   const registries = useRegistries();
-  return useMemo(() => allTiles(states, registries), [states, registries]);
+  const { settings } = useAppSettings();
+  return useMemo(() => {
+    const tiles = allTiles(states, registries);
+    if (settings.hiddenEntities.length === 0) return tiles;
+    const hidden = new Set(settings.hiddenEntities);
+    return tiles.filter((t) => !hidden.has(t.entityId));
+  }, [states, registries, settings.hiddenEntities]);
 }
 
 export function useStatCards() {

@@ -18,7 +18,7 @@ export function AutomationList() {
       {automations.map((a) => (
         <div key={a.entityId} className={styles.row}>
           <span className={styles.icon} style={{ background: a.on ? "var(--kind-fan)" : "var(--icon-off-bg)" }}>
-            <Icon kind="clock" color={a.on ? "#fff" : "rgba(255,255,255,.6)"} size={17} />
+            <Icon kind="clock" color={a.on ? "#fff" : "var(--ink-dim)"} size={17} />
           </span>
           <span className={styles.col}>
             <span className={styles.name}>{a.name}</span>

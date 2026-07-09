@@ -12,6 +12,8 @@ import styles from "./Header.module.css";
 
 const SERVICE_ITEMS: { label: string; href: string }[] = [
   { label: "Settings", href: "/settings" },
+  { label: "Dashboard Entities", href: "/settings/dashboard-entities" },
+  { label: "Appearance", href: "/settings/appearance" },
   { label: "Devices & Services", href: "/settings/devices-services" },
   { label: "Entities", href: "/settings/entities" },
   { label: "Automations & Scenes", href: "/settings/automations-scenes" },

@@ -31,6 +31,7 @@ export interface EntityRegistryEntry {
   platform: string;
   hidden_by: string | null;
   disabled_by: string | null;
+  entity_category?: "config" | "diagnostic" | null;
   labels?: string[];
 }
 
@@ -99,18 +100,30 @@ export type ClientMessage =
 
 export const APP_USER_DATA_KEY = "liquid_glass_dashboard";
 
+export type ThemeMode = "system" | "light" | "dark";
+export type Tint = "Graphite" | "Indigo" | "Mocha" | "Granite";
+
 export interface AppUserData {
-  v: 1;
+  v: 2;
   pinned: string[];
   accent: string;
-  tint: "Graphite" | "Indigo" | "Mocha";
+  tint: Tint;
   showScenes: boolean;
+  /** Manual light/dark override, or "system" to follow the OS/browser preference. */
+  themeMode: ThemeMode;
+  /** Whether the first-run entity setup wizard has been completed. */
+  onboarded: boolean;
+  /** Entity IDs explicitly excluded from the dashboard by the user. */
+  hiddenEntities: string[];
 }
 
 export const DEFAULT_APP_USER_DATA: AppUserData = {
-  v: 1,
+  v: 2,
   pinned: [],
   accent: "#F5A623",
-  tint: "Graphite",
-  showScenes: true
+  tint: "Granite",
+  showScenes: true,
+  themeMode: "system",
+  onboarded: false,
+  hiddenEntities: []
 };
