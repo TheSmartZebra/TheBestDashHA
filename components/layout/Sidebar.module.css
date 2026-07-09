@@ -1,4 +1,16 @@
 .sidebar {
+  /*
+    Always a dark "granite counter" slab, independent of the light/dark app
+    theme, so it reads as a fixed anchor against white walls or a dark room.
+    Locally re-pins the tokens this subtree depends on to their dark values.
+  */
+  --ink: #f2f3f5;
+  --ink-dim: rgba(255, 255, 255, 0.6);
+  --ink-faint: rgba(255, 255, 255, 0.4);
+  --icon-off-bg: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --surface-glass-hi: rgba(255, 255, 255, 0.12);
+
   width: 236px;
   flex: none;
   height: 100%;

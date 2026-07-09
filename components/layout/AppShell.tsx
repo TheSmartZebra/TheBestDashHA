@@ -1,14 +1,24 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
+import { useRouter } from "next/navigation";
 import { Sidebar } from "./Sidebar";
 import { useConnectionStatus } from "../../store/entities-store";
 import { useUiStore } from "../../store/ui-store";
+import { useAppSettings } from "../providers/AppSettingsProvider";
 import styles from "./AppShell.module.css";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const status = useConnectionStatus();
   const edit = useUiStore((s) => s.edit);
+  const router = useRouter();
+  const { settings, loaded } = useAppSettings();
+
+  useEffect(() => {
+    if (loaded && !settings.onboarded) router.replace("/setup");
+  }, [loaded, settings.onboarded, router]);
+
+  if (!loaded || !settings.onboarded) return null;
 
   return (
     <div className={styles.root}>

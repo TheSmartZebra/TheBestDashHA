@@ -36,7 +36,7 @@ export function StatCardsRow() {
           return (
             <StatCard
               key={c.key}
-              icon={<Icon kind={CATEGORY_ICON[c.key]} color={c.anyOn ? "#fff" : "rgba(255,255,255,.6)"} size={17} />}
+              icon={<Icon kind={CATEGORY_ICON[c.key]} color={c.anyOn ? "#fff" : "var(--ink-dim)"} size={17} />}
               iconBg={c.anyOn ? CATEGORY_COLOR_VAR[c.key] : "var(--icon-off-bg)"}
               label={CATEGORY_LABEL[c.key]}
               status={c.status}

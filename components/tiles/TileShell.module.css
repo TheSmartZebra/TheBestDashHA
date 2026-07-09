@@ -103,5 +103,5 @@
   background: var(--accent);
 }
 .pinDotOff {
-  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 0 0 1.5px var(--focus-ring);
 }
