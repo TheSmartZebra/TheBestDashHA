@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "../ds/Icon";
 import { ToggleSwitch } from "../ds/ToggleSwitch";
 import { useAllStates } from "../../store/entities-store";
@@ -43,6 +43,18 @@ export function EntityVisibilityEditor({
 }) {
   const states = useAllStates();
   const [visible, setVisible] = useState<Set<string>>(initialVisible);
+  // `tiles`/`initialVisible` start empty until the WS connection delivers real
+  // entity/registry data, so the initial useState above locks in an empty set.
+  // Seed once, the first time real tiles show up; afterward the user owns
+  // `visible` and we must not clobber their in-progress choices on every
+  // upstream re-render (entity state changes constantly while this is open).
+  const seededRef = useRef(false);
+  useEffect(() => {
+    if (seededRef.current || tiles.length === 0) return;
+    seededRef.current = true;
+    setVisible(new Set(initialVisible));
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- seed once on first non-empty load, not on every initialVisible identity change
+  }, [tiles.length]);
   const groups = useMemo(() => groupSorted(tiles), [tiles]);
   const total = tiles.length;
   const selectedCount = tiles.filter((t) => visible.has(t.entityId)).length;

@@ -136,19 +136,6 @@ export function isHidden(entityId: string, registries: RegistrySnapshot): boolea
   return !!(reg?.hidden_by || reg?.disabled_by);
 }
 
-/**
- * Diagnostic-only sensors/binary_sensors (Wi-Fi signal, "update available", link
- * quality, etc.) that HA itself flags as `entity_category: "diagnostic"`. These
- * are technically tile-eligible but rarely dashboard-worthy, so the setup wizard
- * excludes them from its default selection while still letting users add them back.
- */
-export function isDiagnosticNoise(entityId: string, registries: RegistrySnapshot): boolean {
-  const domain = domainOf(entityId);
-  if (domain !== "sensor" && domain !== "binary_sensor") return false;
-  const reg = registries.entities.find((e) => e.entity_id === entityId);
-  return reg?.entity_category === "diagnostic";
-}
-
 /** Which gesture affordances a tile of this kind supports (dispatch key for components/tiles). */
 export type GestureKind =
   | "toggle"

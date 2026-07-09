@@ -77,12 +77,19 @@ export default function AppearancePage() {
               style={{ background: a.hex }}
               onClick={() => setAccent(a.hex)}
               title={a.name}
+              aria-label={`${a.name} accent color`}
             >
               {settings.accent.toLowerCase() === a.hex.toLowerCase() ? <span className={styles.check} /> : null}
             </button>
           ))}
           <label className={styles.customSwatch} title="Custom color">
-            <input type="color" value={settings.accent} onChange={(e) => setAccent(e.target.value)} className={styles.colorInput} />
+            <input
+              type="color"
+              value={settings.accent}
+              onChange={(e) => setAccent(e.target.value)}
+              className={styles.colorInput}
+              aria-label="Custom accent color"
+            />
           </label>
         </div>
       </div>

@@ -23,7 +23,9 @@ interface AppSettingsContextValue {
 const AppSettingsContext = createContext<AppSettingsContextValue | null>(null);
 
 function useSystemPrefersDark(): boolean {
-  const [prefersDark, setPrefersDark] = useState(true);
+  const [prefersDark, setPrefersDark] = useState(
+    () => typeof window === "undefined" || window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
   useEffect(() => {
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     setPrefersDark(mq.matches);

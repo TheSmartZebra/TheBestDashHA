@@ -1,7 +1,7 @@
 /*
   Design tokens for the Liquid Glass dashboard.
-  --accent / --tint-* are overridden at runtime by AppSettingsProvider based on the
-  user's saved preference (HA frontend user-data); --theme is toggled the same way.
+  --accent / --tint-* and the [data-theme] attribute are all set at runtime by
+  AppSettingsProvider based on the user's saved preference (HA frontend user-data).
   Base :root below is the dark palette; :root[data-theme="light"] overrides it for
   the "White & Granite" light palette (white walls/trim, black granite counters).
 */

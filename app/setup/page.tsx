@@ -6,7 +6,6 @@ import { useAllStates, useConnectionStatus, useRegistries } from "../../store/en
 import { useAppSettings } from "../../components/providers/AppSettingsProvider";
 import { EntityVisibilityEditor } from "../../components/setup/EntityVisibilityEditor";
 import { allTiles } from "../../lib/ha/dashboard";
-import { isDiagnosticNoise } from "../../lib/ha/entity-model";
 import styles from "./page.module.css";
 
 export default function SetupPage() {
@@ -21,7 +20,18 @@ export default function SetupPage() {
   const initialVisible = useMemo(() => {
     const isFirstRun = !settings.onboarded && settings.hiddenEntities.length === 0;
     if (isFirstRun) {
-      return new Set(tiles.filter((t) => !isDiagnosticNoise(t.entityId, registries)).map((t) => t.entityId));
+      // Diagnostic-only sensors/binary_sensors (Wi-Fi signal, "update available", link
+      // quality, etc.) are technically tile-eligible but rarely dashboard-worthy, so they're
+      // excluded from the default selection (still addable manually). Single pass over the
+      // registry to build a lookup set, rather than re-scanning registries.entities per tile.
+      const diagnosticIds = new Set(
+        registries.entities.filter((e) => e.entity_category === "diagnostic").map((e) => e.entity_id)
+      );
+      return new Set(
+        tiles
+          .filter((t) => !((t.kind === "sensor" || t.kind === "binary_sensor") && diagnosticIds.has(t.entityId)))
+          .map((t) => t.entityId)
+      );
     }
     const hidden = new Set(settings.hiddenEntities);
     return new Set(tiles.map((t) => t.entityId).filter((id) => !hidden.has(id)));

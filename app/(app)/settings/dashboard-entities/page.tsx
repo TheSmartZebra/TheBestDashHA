@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Header } from "../../../../components/layout/Header";
 import { EntityVisibilityEditor } from "../../../../components/setup/EntityVisibilityEditor";
@@ -21,11 +21,16 @@ export default function DashboardEntitiesPage() {
     return new Set(tiles.map((t) => t.entityId).filter((id) => !hidden.has(id)));
   }, [tiles, settings.hiddenEntities]);
 
+  useEffect(() => {
+    if (!savedFlash) return;
+    const t = setTimeout(() => setSavedFlash(false), 2000);
+    return () => clearTimeout(t);
+  }, [savedFlash]);
+
   function save(visible: Set<string>) {
     const hiddenEntities = tiles.map((t) => t.entityId).filter((id) => !visible.has(id));
     setHiddenEntities(hiddenEntities);
     setSavedFlash(true);
-    setTimeout(() => setSavedFlash(false), 2000);
   }
 
   return (
